@@ -1,0 +1,4 @@
+export interface UserDataStore {
+
+}
+
