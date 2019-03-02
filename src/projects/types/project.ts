@@ -3,4 +3,5 @@ export type Project = {
     name: string,
     url: string,
     authorId: string,
+    description: string,
 };
