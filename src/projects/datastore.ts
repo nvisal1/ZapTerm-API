@@ -77,4 +77,14 @@ export class ProjectStore implements ProjectDataStore {
             values: [params.id],
         });
     }
+
+    async getUserProjectCount(params: {
+        authorId: string;
+    }): Promise<any> {
+        const result = await this.connection.query({
+            sql: 'SELECT COUNT(authorId) FROM `Projects` WHERE authorId = ?',
+            values: [params.authorId],
+        });
+        return result;
+    }
 }

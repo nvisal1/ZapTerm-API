@@ -16,4 +16,7 @@ export interface ProjectDataStore {
     deleteProject(params: {
         id: string;
     }): Promise<void>;
+    getUserProjectCount(params: {
+        authorId: string;
+    }): Promise<any>;
 }
