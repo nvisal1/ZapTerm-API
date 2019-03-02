@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString } from 'graphql';
-import { getProject } from './interactor';
+import { getProject, getUserProjects } from './interactor';
 
 const ProjectType = new GraphQLObjectType({
     name: 'Project',
@@ -17,6 +17,16 @@ export const project = {
     resolve(parent: any, args: any): any {
         return getProject({
             id: args.id,
+        });
+    },
+};
+
+export const userProjects = {
+    type: ProjectType,
+    args: {authorId: {type: GraphQLID}},
+    resolve(parent: any, args: any): any {
+        return getUserProjects({
+            authorId: args.authorId,
         });
     },
 };

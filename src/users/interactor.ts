@@ -1,4 +1,5 @@
 import { UserStore } from './datastore';
+import { User } from './types/User';
 
 export function getUser(params: {
     id: string;

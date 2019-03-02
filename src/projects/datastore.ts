@@ -28,4 +28,14 @@ export class ProjectStore implements ProjectDataStore {
         });
         return result;
     }
+
+    async getUserProjects(params: {
+        authorId: string;
+    }): Promise<any> {
+        const result = await this.connection.query({
+            sql: 'SELECT * FROM `Projects` WHERE authorId = ?',
+            values: [params.authorId],
+        });
+        return result;
+    }
 }

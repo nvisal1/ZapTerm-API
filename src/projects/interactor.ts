@@ -9,6 +9,14 @@ export function getProject(params: {
     });
 }
 
+export function getUserProjects(params: {
+    authorId: string,
+}): Promise<Project> {
+    return getDataStore().getUserProjects({
+        authorId: params.authorId,
+    });
+}
+
 function getDataStore() {
     return ProjectStore.getInstance();
 }

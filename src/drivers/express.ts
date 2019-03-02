@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as express_graphql from 'express-graphql';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
-import { project } from '../projects/entry';
+import { project, userProjects } from '../projects/entry';
 import { user } from '../users/entry';
 
 export class Express {
@@ -13,6 +13,7 @@ export class Express {
             name: 'RootQueryType',
             fields: {
                 project,
+                userProjects,
                 user,
             },
         });
