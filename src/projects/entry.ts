@@ -7,6 +7,7 @@ const ProjectType = new GraphQLObjectType({
         id: {type: GraphQLID},
         name: {type: GraphQLString},
         url: {type: GraphQLString},
+        description: {type: GraphQLString},
         authorId: {type: GraphQLID},
     }),
 });

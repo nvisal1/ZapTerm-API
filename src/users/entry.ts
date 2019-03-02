@@ -22,3 +22,13 @@ export const user = {
         });
     },
 };
+
+export const searchUsers = {
+    type: UserType,
+    args: {id: {type: GraphQLID}},
+    resolve(parent: any, args: any): any {
+        return getUser({
+            id: args.id,
+        });
+    },
+};

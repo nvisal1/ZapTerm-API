@@ -1,9 +1,11 @@
 import { MySql } from '../drivers/sql';
 import { UserDataStore } from './interfaces/UserDataStore';
 import * as mysql from 'mysql';
+import { User } from './types/User';
 const util = require('util');
 
 export class UserStore implements UserDataStore {
+
     private static instance: UserDataStore;
     private connection: mysql.Connection;
 
@@ -27,5 +29,57 @@ export class UserStore implements UserDataStore {
             values: [params.id],
         });
         return result;
+    }
+
+    async searchUsers(params: {
+        text: string;
+    }): Promise<any> {
+        const result = await this.connection.query({
+            sql: 'SELECT username jobtype FROM `Users` WHERE name LIKE ? OR username LIKE ? OR email LIKE ? OR jobtype LIKE ? OR bio LIKE ?',
+            values: [
+                params.text,
+                params.text,
+                params.text,
+                params.text,
+                params.text,
+            ],
+        });
+        return result;
+    }
+    async insertUser(params: {
+        user: User;
+    }): Promise<void> {
+        await this.connection.query({
+            sql: 'INSERT INTO `Users` (name, username, email, jobtype, bio) VALUES (?, ?, ?, ?, ?)',
+            values: [
+                params.user.name,
+                params.user.username,
+                params.user.email,
+                params.user.jobType,
+                params.user.bio,
+             ],
+        });
+    }
+    async editUser(params: {
+        user: User;
+    }): Promise<void> {
+        await this.connection.query({
+            sql: 'UPDATE `Users` SET name = ?, username = ?, email = ?, jobType = ?, bio = ? WHERE id = ?',
+            values: [
+                params.user.name,
+                params.user.username,
+                params.user.email,
+                params.user.jobType,
+                params.user.bio,
+             ],
+        });
+    }
+    async deleteUser(params: {
+        id: string;
+    }): Promise<void> {
+        await this.connection.query({
+            sql: 'DELETE FROM `Users` WHERE id = ?',
+            values: [params.id],
+        });
     }
 }
