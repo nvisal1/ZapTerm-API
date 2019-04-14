@@ -10,6 +10,9 @@ export interface EnvironmentDataStore {
     getUserEnvironments(params: {
         authorId: string;
     }): Promise<any>;
+    insertEnvironment(params: {
+        environment: Environment,
+    }): Promise<void>;
     editEnvironment(params: {
         environment: Environment;
     }): Promise<void>;

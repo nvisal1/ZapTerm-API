@@ -1,9 +1,9 @@
 export type Environment = {
-    id: string;
+    id?: string;
     docker: boolean;
     git: boolean;
     node: boolean;
-    scripts: string[];
+    scripts?: string[];
     authorId: string;
     name: string;
 };

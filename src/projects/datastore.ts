@@ -15,7 +15,7 @@ export class ProjectStore implements ProjectDataStore {
     }
 
     static getInstance(): ProjectDataStore {
-        if (this.instance) {
+        if (!this.instance) {
             this.instance = new ProjectStore();
         }
         return this.instance;
@@ -54,6 +54,21 @@ export class ProjectStore implements ProjectDataStore {
         });
         return result;
     }
+
+    async insertProject(params: {
+        project: Project,
+    }): Promise<void> {
+        await this.connection.query({
+            sql: 'INSERT INTO `Projects` (name, url, authorId, description) VALUES (?, ?, ?, ?)',
+            values: [
+                params.project.name,
+                params.project.url,
+                params.project.authorId,
+                params.project.description,
+            ],
+        });
+    }
+
 
     async editProject(params: {
         project: Project;

@@ -14,7 +14,7 @@ export class EnvironmentStore implements EnvironmentDataStore {
     }
 
     static getInstance(): EnvironmentDataStore {
-        if (this.instance) {
+        if (!this.instance) {
             this.instance = new EnvironmentStore();
         }
         return this.instance;
@@ -46,6 +46,21 @@ export class EnvironmentStore implements EnvironmentDataStore {
             values: [params.authorId],
         });
         return result;
+    }
+
+    async insertEnvironment(params: {
+        environment: Environment,
+    }): Promise<void> {
+        await this.connection.query({
+            sql: 'INSERT INTO `Environments` (docker, git, node, authorId, name) VALUES (?, ?, ?, ?, ?)',
+            values: [
+                params.environment.docker,
+                params.environment.git,
+                params.environment.node,
+                params.environment.authorId,
+                params.environment.name,
+            ],
+        });
     }
 
     async editEnvironment(params: {

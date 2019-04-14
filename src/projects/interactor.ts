@@ -9,11 +9,19 @@ export function getProject(params: {
     });
 }
 
-export function getUserProjects(params: {
+export async function getUserProjects(params: {
     authorId: string,
 }): Promise<Project> {
     return getDataStore().getUserProjects({
         authorId: params.authorId,
+    });
+}
+
+export async function insertNewProject(params: {
+    project: Project,
+}): Promise<void> {
+    await getDataStore().insertProject({
+        project: params.project,
     });
 }
 

@@ -10,6 +10,9 @@ export interface ProjectDataStore {
     searchProjects(params: {
         text: string;
     }): Promise<any>;
+    insertProject(params: {
+        project: Project,
+    }): Promise<void>;
     editProject(params: {
         project: Project;
     }): Promise<void>;

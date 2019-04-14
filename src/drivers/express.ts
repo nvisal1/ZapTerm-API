@@ -1,7 +1,15 @@
 import * as express from 'express';
 import * as express_graphql from 'express-graphql';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
-import { project, userProjects } from '../projects/entry';
+import {
+    insertEnvironment,
+} from '../environments/entry';
+
+import {
+    project,
+    userProjects,
+    insertProject,
+} from '../projects/entry';
 import {
     user,
     searchUsers,
@@ -17,8 +25,10 @@ export class Express {
         const RootQuery = new GraphQLObjectType({
             name: 'RootQueryType',
             fields: {
+                insertEnvironment,
                 project,
                 userProjects,
+                insertProject,
                 user,
                 login,
                 register,

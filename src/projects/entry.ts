@@ -1,5 +1,5 @@
-import { GraphQLObjectType, GraphQLID, GraphQLString } from 'graphql';
-import { getProject, getUserProjects } from './interactor';
+import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean } from 'graphql';
+import { getProject, getUserProjects, insertNewProject } from './interactor';
 
 const ProjectType = new GraphQLObjectType({
     name: 'Project',
@@ -28,6 +28,26 @@ export const userProjects = {
     resolve(parent: any, args: any): any {
         return getUserProjects({
             authorId: args.authorId,
+        });
+    },
+};
+
+export const insertProject = {
+    type: GraphQLBoolean,
+    args: {
+        name: {type: GraphQLString},
+        url: {type: GraphQLString},
+        description: {type: GraphQLString},
+        authorId: {type: GraphQLString},
+    },
+    resolve(parent: any, args: any): any {
+        return insertNewProject({
+            project: {
+                name: args.name,
+                url: args.url,
+                description: args.description,
+                authorId: args.authorId,
+            },
         });
     },
 };
