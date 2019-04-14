@@ -2,7 +2,13 @@ import * as express from 'express';
 import * as express_graphql from 'express-graphql';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import {
+    getEnvironment,
+    getUserEnvironments,
+    getUserEnvironmentCount,
+    searchEnvironments,
     insertEnvironment,
+    editEnvironment,
+    deleteEnvironment,
 } from '../environments/entry';
 
 import {
@@ -25,7 +31,13 @@ export class Express {
         const RootQuery = new GraphQLObjectType({
             name: 'RootQueryType',
             fields: {
+                getEnvironment,
+                getUserEnvironments,
+                getUserEnvironmentCount,
+                searchEnvironments,
                 insertEnvironment,
+                editEnvironment,
+                deleteEnvironment,
                 project,
                 userProjects,
                 insertProject,
@@ -49,7 +61,7 @@ export class Express {
         });
 
         app.listen(3000, () => {
-            console.log('ZapTerm Server is listening on port 3000');
+            console.log('-It API is listening on port 3000');
         });
     }
 }

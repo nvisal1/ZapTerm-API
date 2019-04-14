@@ -35,6 +35,7 @@ export class EnvironmentStore implements EnvironmentDataStore {
                 params.text,
             ],
         });
+        console.log(result);
         return result;
     }
 
@@ -67,12 +68,11 @@ export class EnvironmentStore implements EnvironmentDataStore {
         environment: Environment;
     }): Promise<void> {
         await this.connection.query({
-            sql: 'UPDATE `Environments` SET docker = ?, git = ?, email = ?, node = ?, scripts = ?, name = ? WHERE id = ?',
+            sql: 'UPDATE `Environments` SET docker = ?, git = ?, node = ?, name = ? WHERE id = ?',
             values: [
                 params.environment.docker,
                 params.environment.git,
                 params.environment.node,
-                params.environment.scripts,
                 params.environment.name,
                 params.environment.id,
              ],
@@ -95,7 +95,8 @@ export class EnvironmentStore implements EnvironmentDataStore {
             sql: 'SELECT * FROM `Environments` WHERE id = ?',
             values: [params.id],
         });
-        return result;
+
+        return result[0];
     }
 
     async getUserEnvironmentCount(params: {
@@ -105,6 +106,6 @@ export class EnvironmentStore implements EnvironmentDataStore {
             sql: 'SELECT COUNT(authorId) FROM `Environments` WHERE authorId = ?',
             values: [params.authorId],
         });
-        return result;
+        return result[0]['COUNT(authorId)'];
     }
 }
