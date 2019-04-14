@@ -31,7 +31,7 @@ export const project = {
 };
 
 export const userProjects = {
-    type: ProjectType,
+    type: GraphQLList(ProjectType),
     args: {authorId: {type: GraphQLID}},
     resolve(parent: any, args: any): any {
         return getUserProjects({
