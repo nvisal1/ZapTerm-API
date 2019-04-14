@@ -25,6 +25,38 @@ export async function insertNewProject(params: {
     });
 }
 
+export async function searchAllProjects(params: {
+    text: string,
+}): Promise<Project[]> {
+    return await getDataStore().searchProjects({
+        text: params.text,
+    });
+}
+
+export async function editUserProject(params: {
+    project: Project,
+}): Promise<void> {
+    await getDataStore().editProject({
+        project: params.project,
+    });
+}
+
+export async function deleteUserProject(params: {
+    id: string,
+}): Promise<void> {
+    await getDataStore().deleteProject({
+        id: params.id,
+    });
+}
+
+export async function getProjectCount(params: {
+    authorId: string,
+}): Promise<number> {
+    return await getDataStore().getUserProjectCount({
+        authorId: params.authorId,
+    });
+}
+
 function getDataStore() {
     return ProjectStore.getInstance();
 }

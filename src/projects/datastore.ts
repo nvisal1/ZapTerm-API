@@ -28,7 +28,7 @@ export class ProjectStore implements ProjectDataStore {
             sql: 'SELECT * FROM `Projects` WHERE id = ?',
             values: [params.id],
         });
-        return result;
+        return result[0];
     }
 
     async getUserProjects(params: {
@@ -100,6 +100,6 @@ export class ProjectStore implements ProjectDataStore {
             sql: 'SELECT COUNT(authorId) FROM `Projects` WHERE authorId = ?',
             values: [params.authorId],
         });
-        return result;
+        return result[0]['COUNT(authorId)'];
     }
 }

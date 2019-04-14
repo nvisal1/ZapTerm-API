@@ -1,5 +1,6 @@
-import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean } from 'graphql';
-import { getProject, getUserProjects, insertNewProject } from './interactor';
+import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean, GraphQLList, GraphQLInt } from 'graphql';
+import { getProject, getUserProjects, insertNewProject, searchAllProjects, editUserProject, deleteUserProject, getProjectCount } from './interactor';
+import { stringify } from 'querystring';
 
 const ProjectType = new GraphQLObjectType({
     name: 'Project',
@@ -9,6 +10,13 @@ const ProjectType = new GraphQLObjectType({
         url: {type: GraphQLString},
         description: {type: GraphQLString},
         authorId: {type: GraphQLID},
+    }),
+});
+
+const ProjectCountType = new GraphQLObjectType({
+    name: 'ProjectCount',
+    fields: () => ({
+        count: {type: GraphQLInt},
     }),
 });
 
@@ -32,6 +40,18 @@ export const userProjects = {
     },
 };
 
+export const searchProjects = {
+    type: GraphQLList(ProjectType),
+    args: {
+        text: {type: GraphQLString },
+    },
+    resolve(parent: any, args: any): any {
+        return searchAllProjects({
+            text: args.text,
+        });
+    }
+}
+
 export const insertProject = {
     type: GraphQLBoolean,
     args: {
@@ -52,6 +72,47 @@ export const insertProject = {
     },
 };
 
+export const editProject = {
+    type: GraphQLBoolean,
+    args: {
+        name: {type: GraphQLString},
+        url: {type: GraphQLString},
+        description: {type: GraphQLString},
+    },
+    resolve(parent: any, args: any): any {
+        return editUserProject({
+            project: {
+                name: args.name,
+                url: args.url,
+                description: args.description,
+            },
+        });
+    },
+};
+
+export const deleteProject = {
+    type: GraphQLBoolean,
+    args: {
+        id: {type: GraphQLID },
+    },
+    resolve(parent: any, args: any): any {
+        return deleteUserProject({
+            id: args.id,
+        });
+    },
+};
+
+export const getUserProjectCount = {
+    type: ProjectCountType,
+    args: {
+        authorId: {type: GraphQLID },
+    },
+    resolve(parent: any, args: any): any {
+        return getProjectCount({
+            authorId: args.authorId,
+        });
+    },
+};
 
 
 

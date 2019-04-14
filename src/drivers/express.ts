@@ -14,7 +14,11 @@ import {
 import {
     project,
     userProjects,
+    searchProjects,
     insertProject,
+    editProject,
+    deleteProject,
+    getUserProjectCount,
 } from '../projects/entry';
 import {
     user,
@@ -41,7 +45,11 @@ export class Express {
                 deleteEnvironment,
                 project,
                 userProjects,
+                searchProjects,
                 insertProject,
+                editProject,
+                deleteProject,
+                getUserProjectCount,
                 user,
                 login,
                 register,
