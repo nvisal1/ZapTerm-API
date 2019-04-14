@@ -82,7 +82,8 @@ export class UserStore implements UserDataStore {
                 params.user.email,
                 params.user.jobType,
                 params.user.bio,
-             ],
+                params.user.id,
+            ],
         });
     }
     async deleteUser(params: {

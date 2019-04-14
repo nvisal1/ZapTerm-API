@@ -21,6 +21,7 @@ import {
     searchUsers,
     login,
     register,
+    editUser,
 } from '../users/entry';
 
 export class Express {
@@ -44,6 +45,7 @@ export class Express {
                 user,
                 login,
                 register,
+                editUser,
             },
         });
 

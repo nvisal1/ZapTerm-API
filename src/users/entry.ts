@@ -1,5 +1,5 @@
-import { GraphQLObjectType, GraphQLID, GraphQLString } from 'graphql';
-import { getUser, getToken, insertUser } from './interactor';
+import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean } from 'graphql';
+import { getUser, getToken, insertUser, editUserInfo } from './interactor';
 
 const UserType = new GraphQLObjectType({
     name: 'User',
@@ -36,6 +36,30 @@ export const searchUsers = {
     resolve(parent: any, args: any): any {
         return getUser({
             id: args.id,
+        });
+    },
+};
+
+export const editUser = {
+    type: GraphQLBoolean,
+    args: {
+        id: {type: GraphQLID },
+        name: {type: GraphQLString },
+        username: {type: GraphQLString },
+        email: {type: GraphQLString },
+        jobType: {type: GraphQLString },
+        bio: {type: GraphQLString },
+    },
+    resolve(parent: any, args: any): any {
+        return editUserInfo({
+            user: {
+                id: args.id,
+                name: args.name,
+                username: args.username,
+                email: args.email,
+                jobType: args.jobType,
+                bio: args.bio,
+            },
         });
     },
 };

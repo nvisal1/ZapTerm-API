@@ -61,6 +61,14 @@ export async function insertUser(params: {
     return {token};
 }
 
+export async function editUserInfo(params: {
+    user: User,
+}): Promise<void> {
+    await getDataStore().editUser({
+        user: params.user,
+    });
+}
+
 function getDataStore() {
     return UserStore.getInstance();
 }
