@@ -67,6 +67,7 @@ export class EnvironmentStore implements EnvironmentDataStore {
     async editEnvironment(params: {
         environment: Environment;
     }): Promise<void> {
+        console.log(params.environment);
         await this.connection.query({
             sql: 'UPDATE `Environments` SET docker = ?, git = ?, node = ?, name = ? WHERE id = ?',
             values: [

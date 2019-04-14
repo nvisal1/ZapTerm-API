@@ -44,7 +44,6 @@ export async function searchAllEnvironments(params: {
     });
 }
 
-
 export async function insertNewEnvironment(params: {
     environment: Environment,
 }): Promise<void> {
