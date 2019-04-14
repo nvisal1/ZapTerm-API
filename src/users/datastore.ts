@@ -15,7 +15,7 @@ export class UserStore implements UserDataStore {
     }
 
     static getInstance(): UserDataStore {
-        if (this.instance) {
+        if (!this.instance) {
             this.instance = new UserStore();
         }
         return this.instance;
@@ -29,6 +29,16 @@ export class UserStore implements UserDataStore {
             values: [params.id],
         });
         return result;
+    }
+
+    async getUserByUsername(params: {
+        username: string,
+    }): Promise<any> {
+        const result = await this.connection.query({
+            sql: 'SELECT * FROM `Users` WHERE username = ?',
+            values: [params.username],
+        });
+        return result[0];
     }
 
     async searchUsers(params: {
@@ -50,13 +60,14 @@ export class UserStore implements UserDataStore {
         user: User;
     }): Promise<void> {
         await this.connection.query({
-            sql: 'INSERT INTO `Users` (name, username, email, jobtype, bio) VALUES (?, ?, ?, ?, ?)',
+            sql: 'INSERT INTO `Users` (name, username, email, jobtype, bio, password) VALUES (?, ?, ?, ?, ?, ?)',
             values: [
                 params.user.name,
                 params.user.username,
                 params.user.email,
                 params.user.jobType,
                 params.user.bio,
+                params.user.password,
              ],
         });
     }

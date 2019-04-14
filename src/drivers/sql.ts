@@ -26,7 +26,7 @@ export class MySql {
             host : process.env.HOST,
             user : process.env.USERNAME,
             password : process.env.PASSWORD,
-            database : process.env.DATABASE,
+            database: process.env.DB,
         });
     }
 
