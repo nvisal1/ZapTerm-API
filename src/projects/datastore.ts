@@ -74,7 +74,7 @@ export class ProjectStore implements ProjectDataStore {
         project: Project;
     }): Promise<void> {
         await this.connection.query({
-            sql: 'UPDATE `Projects` SET name = ?, url = ?, email = ?, description = ? WHERE id = ?',
+            sql: 'UPDATE `Projects` SET name = ?, url = ?, description = ? WHERE id = ?',
             values: [
                 params.project.name,
                 params.project.url,

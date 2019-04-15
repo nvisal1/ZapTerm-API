@@ -78,6 +78,7 @@ export const editProject = {
         name: {type: GraphQLString},
         url: {type: GraphQLString},
         description: {type: GraphQLString},
+        id: {type: GraphQLID },
     },
     resolve(parent: any, args: any): any {
         return editUserProject({
@@ -85,6 +86,7 @@ export const editProject = {
                 name: args.name,
                 url: args.url,
                 description: args.description,
+                id: args.id,
             },
         });
     },
