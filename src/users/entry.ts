@@ -1,5 +1,6 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean } from 'graphql';
-import { getUser, getToken, insertUser, editUserInfo } from './interactor';
+import { getUser, getToken, insertUser, editUserInfo, deleteUserInfo } from './interactor';
+import { resolve } from 'path';
 
 const UserType = new GraphQLObjectType({
     name: 'User',
@@ -60,6 +61,18 @@ export const editUser = {
                 jobType: args.jobType,
                 bio: args.bio,
             },
+        });
+    },
+};
+
+export const deleteUser = {
+    type: GraphQLBoolean,
+    args: {
+        id: {type: GraphQLID },
+    },
+    resolve(parent: any, args: any): any {
+        return deleteUserInfo({
+            id: args.id,
         });
     },
 };

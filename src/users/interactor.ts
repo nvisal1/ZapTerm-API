@@ -23,8 +23,6 @@ export async function getToken(params: {
         throw Error('User not found');
     }
 
-
-
     const passwordMatch = await bcrypt.compare(params.password, user.password);
     if (!passwordMatch) {
         throw new Error('Incorrect Password');
@@ -66,6 +64,13 @@ export async function editUserInfo(params: {
 }): Promise<void> {
     await getDataStore().editUser({
         user: params.user,
+    });
+}
+export async function deleteUserInfo(params: {
+    id: string,
+}): Promise<void> {
+    await getDataStore().deleteUser({
+        id: params.id,
     });
 }
 

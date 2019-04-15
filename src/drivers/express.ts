@@ -26,6 +26,7 @@ import {
     login,
     register,
     editUser,
+    deleteUser,
 } from '../users/entry';
 
 export class Express {
@@ -54,6 +55,7 @@ export class Express {
                 login,
                 register,
                 editUser,
+                deleteUser,
             },
         });
 
