@@ -51,10 +51,11 @@ export async function deleteUserProject(params: {
 
 export async function getProjectCount(params: {
     authorId: string,
-}): Promise<number> {
-    return await getDataStore().getUserProjectCount({
+}): Promise<{count: number}> {
+    const count = await getDataStore().getUserProjectCount({
         authorId: params.authorId,
     });
+    return {count};
 }
 
 function getDataStore() {
