@@ -88,7 +88,7 @@ export class ProjectStore implements ProjectDataStore {
         id: string;
     }): Promise<void> {
         await this.connection.query({
-            sql: 'SDELETE FROM `Projects` WHERE id = ?',
+            sql: 'DELETE FROM `Projects` WHERE id = ?',
             values: [params.id],
         });
     }
