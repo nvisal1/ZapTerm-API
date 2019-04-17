@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean, GraphQLList, GraphQLInt } from 'graphql';
-import { getProject, getUserProjects, insertNewProject, searchAllProjects, editUserProject, deleteUserProject, getProjectCount } from './interactor';
+import { getProject, getUserProjects, insertNewProject, searchAllProjects, editUserProject, deleteUserProject, getProjectCount, buildProject } from './interactor';
 import { stringify } from 'querystring';
 
 const ProjectType = new GraphQLObjectType({
@@ -60,6 +60,7 @@ export const insertProject = {
         url: {type: GraphQLString},
         description: {type: GraphQLString},
         authorId: {type: GraphQLString},
+        thumbnail: {type: GraphQLString},
     },
     resolve(parent: any, args: any): any {
         return insertNewProject({
@@ -68,6 +69,7 @@ export const insertProject = {
                 url: args.url,
                 description: args.description,
                 authorId: args.authorId,
+                thumbnail: args.thumbnail,
             },
         });
     },
@@ -80,6 +82,7 @@ export const editProject = {
         url: {type: GraphQLString},
         description: {type: GraphQLString},
         id: {type: GraphQLID },
+        thumbnail: {type: GraphQLString},
     },
     resolve(parent: any, args: any): any {
         return editUserProject({
@@ -88,6 +91,7 @@ export const editProject = {
                 url: args.url,
                 description: args.description,
                 id: args.id,
+                thumbnail: args.thumbnail,
             },
         });
     },
@@ -113,6 +117,18 @@ export const getUserProjectCount = {
     resolve(parent: any, args: any): any {
         return getProjectCount({
             authorId: args.authorId,
+        });
+    },
+};
+
+export const startProject = {
+    type: GraphQLBoolean,
+    args: {
+        id: {type: GraphQLID},
+    },
+    resolve(parent: any, args: any): any {
+        return buildProject({
+            id: args.id,
         });
     },
 };

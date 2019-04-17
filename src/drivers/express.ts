@@ -20,6 +20,7 @@ import {
     editProject,
     deleteProject,
     getUserProjectCount,
+    startProject,
 } from '../projects/entry';
 import {
     user,
@@ -52,6 +53,7 @@ export class Express {
                 editProject,
                 deleteProject,
                 getUserProjectCount,
+                startProject,
                 user,
                 login,
                 register,

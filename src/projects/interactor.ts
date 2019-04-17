@@ -1,5 +1,6 @@
 import { ProjectStore } from './datastore';
-import { Project } from './types/project';
+import { Project } from './types/project';\
+import * as shell from 'shelljs';
 
 export function getProject(params: {
     id: string,
@@ -56,6 +57,17 @@ export async function getProjectCount(params: {
         authorId: params.authorId,
     });
     return {count};
+}
+
+export async function buildProject(params: {
+    id: string,
+}): Promise<void> {
+    const project = await getDataStore().getProject({
+        id: params.id,
+    });
+    console.log(project);
+    await shell.exec(`docker build --build-arg gitURL=${project.url} --file ./projectDockerfile .`);
+    // shell.exec(`docker run -p 8080:8088/tcp -p 4100:4000/tcp project:latest`);
 }
 
 function getDataStore() {
