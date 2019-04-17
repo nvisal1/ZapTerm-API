@@ -28,7 +28,7 @@ export class UserStore implements UserDataStore {
             sql: 'SELECT * FROM `Users` WHERE id = ?',
             values: [params.id],
         });
-        return result;
+        return result[0];
     }
 
     async getUserByUsername(params: {
