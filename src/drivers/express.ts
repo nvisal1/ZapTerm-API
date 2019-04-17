@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as express_graphql from 'express-graphql';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
+import * as cors from 'cors';
 import {
     getEnvironment,
     getUserEnvironments,
@@ -62,6 +63,13 @@ export class Express {
         const schema = new GraphQLSchema({
             query: RootQuery,
         });
+
+        app.use(
+            cors({
+              origin: true,
+              credentials: true,
+            }),
+          );
 
         app.use('/zap', express_graphql({
             schema,

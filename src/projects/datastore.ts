@@ -59,12 +59,13 @@ export class ProjectStore implements ProjectDataStore {
         project: Project,
     }): Promise<void> {
         await this.connection.query({
-            sql: 'INSERT INTO `Projects` (name, url, authorId, description) VALUES (?, ?, ?, ?)',
+            sql: 'INSERT INTO `Projects` (name, url, authorId, description, thumbnail) VALUES (?, ?, ?, ?, ?)',
             values: [
                 params.project.name,
                 params.project.url,
                 params.project.authorId,
                 params.project.description,
+                params.project.thumbnail,
             ],
         });
     }

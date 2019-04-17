@@ -4,4 +4,5 @@ export type Project = {
     url: string,
     authorId?: string,
     description: string,
+    thumbnail: string,
 };

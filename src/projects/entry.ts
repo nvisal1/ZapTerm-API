@@ -10,6 +10,7 @@ const ProjectType = new GraphQLObjectType({
         url: {type: GraphQLString},
         description: {type: GraphQLString},
         authorId: {type: GraphQLID},
+        thumbnail: {type: GraphQLString },
     }),
 });
 
