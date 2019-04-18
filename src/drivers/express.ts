@@ -31,6 +31,9 @@ import {
     editUser,
     deleteUser,
 } from '../users/entry';
+import {
+    getAllFrameworks,
+} from '../frameworks/entry';
 
 export class Express {
 
@@ -61,6 +64,7 @@ export class Express {
                 register,
                 editUser,
                 deleteUser,
+                getAllFrameworks,
             },
         });
 
