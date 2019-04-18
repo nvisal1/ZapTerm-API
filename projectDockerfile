@@ -1,6 +1,8 @@
 FROM node:8
 
 ARG gitURL
+ARG directoryName
+ARG framework
 
 #Install git 
 RUN apt-get update && \
@@ -9,20 +11,12 @@ RUN apt-get update && \
 
 RUN git clone ${gitURL}
 
-# Create app directory
-WORKDIR /usr/src/app
+WORKDIR ${directoryName}
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
-
-# Bundle app source
-COPY . .
+RUN if [ "$framework" = "angular" ] ; then npm install -g @angular/cli && npm ci ; fi
+RUN if [ "$framework" = "react" ] ; then npm ci ; fi
+RUN if [ "$framework" = "vue"] ; then npm ci ; fi
+RUN if [ "$framework"  = "nodejs" ] ; then npm ci ; fi
+RUN if [ "$framework"  = "compose" ] ; then docker-compose up; fi
 
 EXPOSE 8080 4200 4100
-CMD [ "npm", "start" ]

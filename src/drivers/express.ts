@@ -21,6 +21,7 @@ import {
     deleteProject,
     getUserProjectCount,
     startProject,
+    stopProject,
 } from '../projects/entry';
 import {
     user,
@@ -54,6 +55,7 @@ export class Express {
                 deleteProject,
                 getUserProjectCount,
                 startProject,
+                stopProject,
                 user,
                 login,
                 register,

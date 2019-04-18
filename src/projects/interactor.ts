@@ -61,13 +61,32 @@ export async function getProjectCount(params: {
 
 export async function buildProject(params: {
     id: string,
-}): Promise<void> {
+}): Promise<{code: string}> {
     const project = await getDataStore().getProject({
         id: params.id,
     });
-    console.log(project);
-    await shell.exec(`docker build --build-arg gitURL=${project.url} --file ./projectDockerfile .`);
-    // shell.exec(`docker run -p 8080:8088/tcp -p 4100:4000/tcp project:latest`);
+    const splitUrl = project.url.split('/');
+    const filteredPath = splitUrl.filter(split => split.includes('.git'));
+    const directoryName = filteredPath[0].replace('.git', '');
+    const framework = 'angular';
+    const startCommand = 'ng serve --host 0.0.0.0';
+    // tslint:disable-next-line:max-line-length
+    const code = await shell.exec(`docker build --build-arg framework=${framework} --build-arg gitURL=${project.url} --build-arg directoryName=${directoryName} -t project --file ./projectDockerfile .`);
+    await shell.exec(`docker run --name project -d -p 8080:8088/tcp -p 4100:4000/tcp -p 8000:4200/tcp project:latest ${startCommand}`);
+    return {code};
+}
+
+export async function destroyProject(params: {
+
+}): Promise<void> {
+    // Stop container
+    await shell.exec(`docker container stop project:latest`);
+    // Remove container
+    await shell.exec(`docker container rm --force project`);
+    // Remove image
+    await shell.exec(`docker rmi project`);
+    // Clean up cache
+    await shell.exec(`docker system prune -af`);
 }
 
 function getDataStore() {

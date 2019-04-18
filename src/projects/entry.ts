@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean, GraphQLList, GraphQLInt } from 'graphql';
-import { getProject, getUserProjects, insertNewProject, searchAllProjects, editUserProject, deleteUserProject, getProjectCount, buildProject } from './interactor';
+import { getProject, getUserProjects, insertNewProject, searchAllProjects, editUserProject, deleteUserProject, getProjectCount, buildProject, destroyProject } from './interactor';
 import { stringify } from 'querystring';
 
 const ProjectType = new GraphQLObjectType({
@@ -18,6 +18,13 @@ const ProjectCountType = new GraphQLObjectType({
     name: 'ProjectCount',
     fields: () => ({
         count: {type: GraphQLInt},
+    }),
+});
+
+const ProjectBuildType = new GraphQLObjectType({
+    name: 'ProjectBuild',
+    fields: () => ({
+        code: {type: GraphQLString},
     }),
 });
 
@@ -122,12 +129,24 @@ export const getUserProjectCount = {
 };
 
 export const startProject = {
-    type: GraphQLBoolean,
+    type: ProjectBuildType,
     args: {
         id: {type: GraphQLID},
     },
     resolve(parent: any, args: any): any {
         return buildProject({
+            id: args.id,
+        });
+    },
+};
+
+export const stopProject = {
+    type: GraphQLBoolean,
+    args: {
+        id: {type: GraphQLID},
+    },
+    resolve(parent: any, args: any): any {
+        return destroyProject({
             id: args.id,
         });
     },
