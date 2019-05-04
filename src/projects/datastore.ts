@@ -45,7 +45,7 @@ export class ProjectStore implements ProjectDataStore {
         text: string;
     }): Promise<any> {
         const result = await this.connection.query({
-            sql: 'SELECT name FROM `Projects` WHERE name LIKE ? OR url LIKE ? OR description LIKE ?',
+            sql: 'SELECT * FROM `Projects` WHERE name LIKE ? OR url LIKE ? OR description LIKE ?',
             values: [
                 params.text,
                 params.text,
