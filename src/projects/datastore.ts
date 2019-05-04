@@ -46,7 +46,7 @@ export class ProjectStore implements ProjectDataStore {
     }): Promise<any> {
         const result = await this.connection.query({
             // tslint:disable-next-line:max-line-length
-            sql: 'SELECT Projects.id, Users.username, Users.name, Users.email, Projects.url, Projects.name, Projects.description, Projects.thumbnail FROM `Projects` INNER JOIN `Users` ON Projects.authorId = Users.id WHERE Projects.name LIKE ? OR Projects.url LIKE ? OR Projects.description LIKE ? OR Users.name LIKE ? OR Users.email LIKE ? OR Users.username LIKE ?',
+            sql: 'SELECT Projects.id, Projects.authorId, Users.username, Users.name, Users.email, Projects.url, Projects.name, Projects.description, Projects.thumbnail FROM `Projects` INNER JOIN `Users` ON Projects.authorId = Users.id WHERE Projects.name LIKE ? OR Projects.url LIKE ? OR Projects.description LIKE ? OR Users.name LIKE ? OR Users.email LIKE ? OR Users.username LIKE ?',
             values: [
                 params.text,
                 params.text,
