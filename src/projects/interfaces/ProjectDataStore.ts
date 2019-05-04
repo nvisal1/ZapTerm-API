@@ -13,6 +13,11 @@ export interface ProjectDataStore {
     insertProject(params: {
         project: Project,
     }): Promise<void>;
+    insertEnvironment(params: {
+        port: string,
+        directoryName: string,
+        frameworkId: string,
+    }): Promise<void>;
     editProject(params: {
         project: Project;
     }): Promise<void>;

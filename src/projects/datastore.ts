@@ -62,14 +62,34 @@ export class ProjectStore implements ProjectDataStore {
     async insertProject(params: {
         project: Project,
     }): Promise<void> {
+        const id = await this.connection.query({
+            sql: 'SELECT id FROM `Environments` WHERE id = (SELECT max(id) FROM `Environments`)',
+        });
+
         await this.connection.query({
-            sql: 'INSERT INTO `Projects` (name, url, authorId, description, thumbnail) VALUES (?, ?, ?, ?, ?)',
+            sql: 'INSERT INTO `Projects` (name, url, authorId, description, thumbnail, environmentId) VALUES (?, ?, ?, ?, ?, ?)',
             values: [
                 params.project.name,
                 params.project.url,
                 params.project.authorId,
                 params.project.description,
                 params.project.thumbnail,
+                id[0].id,
+            ],
+        });
+    }
+
+    async insertEnvironment(params: {
+        port: string,
+        directoryName: string,
+        frameworkId: string,
+    }): Promise<void> {
+        await this.connection.query({
+            sql: 'INSERT INTO `Environments` (port, directoryName, frameworkId) VALUES (?, ?, ?)',
+            values: [
+                params.port,
+                params.directoryName,
+                params.frameworkId,
             ],
         });
     }

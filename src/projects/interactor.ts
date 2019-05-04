@@ -19,10 +19,29 @@ export async function getUserProjects(params: {
 }
 
 export async function insertNewProject(params: {
-    project: Project,
+    name: string,
+    url: string,
+    description: string,
+    authorId: string,
+    thumbnail: string,
+    directoryName: string,
+    port: string,
+    frameworkId: string,
 }): Promise<void> {
+    await getDataStore().insertEnvironment({
+        port: params.port,
+        directoryName: params.directoryName,
+        frameworkId: params.frameworkId,
+    });
+    const project = {
+        name: params.name,
+        url: params.url,
+        authorId: params.authorId,
+        description: params.description,
+        thumbnail: params.thumbnail,
+    };
     await getDataStore().insertProject({
-        project: params.project,
+        project: project,
     });
 }
 

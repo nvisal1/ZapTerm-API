@@ -68,16 +68,20 @@ export const insertProject = {
         description: {type: GraphQLString},
         authorId: {type: GraphQLString},
         thumbnail: {type: GraphQLString},
+        directoryName: {type: GraphQLString},
+        port: {type: GraphQLString},
+        frameworkId: {type: GraphQLID},
     },
     resolve(parent: any, args: any): any {
         return insertNewProject({
-            project: {
-                name: args.name,
-                url: args.url,
-                description: args.description,
-                authorId: args.authorId,
-                thumbnail: args.thumbnail,
-            },
+            name: args.name,
+            url: args.url,
+            description: args.description,
+            authorId: args.authorId,
+            thumbnail: args.thumbnail,
+            directoryName: args.directoryName,
+            port: args.port,
+            frameworkId: args.frameworkId,
         });
     },
 };

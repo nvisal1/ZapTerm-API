@@ -5,4 +5,5 @@ export type Project = {
     authorId?: string,
     description: string,
     thumbnail: string,
+    environmentId?: string,
 };
