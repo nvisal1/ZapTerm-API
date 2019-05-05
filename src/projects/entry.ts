@@ -11,6 +11,7 @@ const ProjectType = new GraphQLObjectType({
         description: {type: GraphQLString},
         authorId: {type: GraphQLID},
         thumbnail: {type: GraphQLString },
+        environmentId: {type: GraphQLID },
     }),
 });
 

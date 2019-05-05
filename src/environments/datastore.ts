@@ -53,13 +53,11 @@ export class EnvironmentStore implements EnvironmentDataStore {
         environment: Environment,
     }): Promise<void> {
         await this.connection.query({
-            sql: 'INSERT INTO `Environments` (docker, git, node, authorId, name) VALUES (?, ?, ?, ?, ?)',
+            sql: 'INSERT INTO `Environments` (port, directoryName, frameworkId) VALUES (?, ?, ?)',
             values: [
-                params.environment.docker,
-                params.environment.git,
-                params.environment.node,
-                params.environment.authorId,
-                params.environment.name,
+                params.environment.port,
+                params.environment.directoryName,
+                params.environment.frameworkId,
             ],
         });
     }
@@ -69,12 +67,11 @@ export class EnvironmentStore implements EnvironmentDataStore {
     }): Promise<void> {
         console.log(params.environment);
         await this.connection.query({
-            sql: 'UPDATE `Environments` SET docker = ?, git = ?, node = ?, name = ? WHERE id = ?',
+            sql: 'UPDATE `Environments` SET port = ?, directoryName = ?, frameworkId = ?, id = ?',
             values: [
-                params.environment.docker,
-                params.environment.git,
-                params.environment.node,
-                params.environment.name,
+                params.environment.port,
+                params.environment.directoryName,
+                params.environment.frameworkId,
                 params.environment.id,
              ],
         });

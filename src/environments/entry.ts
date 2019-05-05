@@ -13,11 +13,9 @@ const EnvironmentType = new GraphQLObjectType({
     name: 'Environment',
     fields: () => ({
         id: {type: GraphQLID},
-        docker: {type: GraphQLString},
-        git: {type: GraphQLString},
-        node: {type: GraphQLString},
-        authorId: {type: GraphQLID},
-        name: {type: GraphQLString},
+        port: {type: GraphQLString},
+        directoryName: {type: GraphQLString},
+        frameworkId: {type: GraphQLID},
     }),
 });
 
