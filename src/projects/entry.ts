@@ -58,8 +58,8 @@ export const searchProjects = {
         return searchAllProjects({
             text: args.text,
         });
-    }
-}
+    },
+};
 
 export const insertProject = {
     type: GraphQLBoolean,
@@ -93,18 +93,24 @@ export const editProject = {
         name: {type: GraphQLString},
         url: {type: GraphQLString},
         description: {type: GraphQLString},
-        id: {type: GraphQLID },
+        authorId: {type: GraphQLID },
         thumbnail: {type: GraphQLString},
+        directoryName: {type: GraphQLString},
+        port: {type: GraphQLString},
+        frameworkId: {type: GraphQLID},
+        environmentId: {type: GraphQLID},
     },
     resolve(parent: any, args: any): any {
         return editUserProject({
-            project: {
-                name: args.name,
-                url: args.url,
-                description: args.description,
-                id: args.id,
-                thumbnail: args.thumbnail,
-            },
+            name: args.name,
+            url: args.url,
+            description: args.description,
+            authorId: args.id,
+            thumbnail: args.thumbnail,
+            directoryName: args.directoryName,
+            port: args.port,
+            frameworkId: args.frameworkId,
+            environmentId: args.environmentId,
         });
     },
 };

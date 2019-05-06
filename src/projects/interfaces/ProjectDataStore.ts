@@ -18,6 +18,12 @@ export interface ProjectDataStore {
         directoryName: string,
         frameworkId: string,
     }): Promise<void>;
+    editEnvironment(params: {
+        port: string,
+        directoryName: string,
+        frameworkId: string,
+        id: string,
+    }): Promise<void>;
     editProject(params: {
         project: Project;
     }): Promise<void>;

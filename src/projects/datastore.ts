@@ -94,6 +94,22 @@ export class ProjectStore implements ProjectDataStore {
         });
     }
 
+    async editEnvironment(params: {
+        port: string,
+        directoryName: string,
+        frameworkId: string,
+        id: string,
+    }): Promise<void> {
+        await this.connection.query({
+            sql: 'UPDATE `Environments` SET port = ?, directoryName = ?, frameworkId = ? WHERE id = ?',
+            values: [
+                params.port,
+                params.directoryName,
+                params.frameworkId,
+                params.id,
+            ],
+        });
+    }
 
     async editProject(params: {
         project: Project;

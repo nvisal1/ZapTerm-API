@@ -54,10 +54,32 @@ export async function searchAllProjects(params: {
 }
 
 export async function editUserProject(params: {
-    project: Project,
+    name: string,
+    url: string,
+    description: string,
+    authorId: string,
+    thumbnail: string,
+    directoryName: string,
+    port: string,
+    frameworkId: string,
+    environmentId: string,
 }): Promise<void> {
+
+    await getDataStore().editEnvironment({
+        port: params.port,
+        directoryName: params.directoryName,
+        frameworkId: params.frameworkId,
+        id: params.environmentId,
+    });
+    const project = {
+        name: params.name,
+        url: params.url,
+        authorId: params.authorId,
+        description: params.description,
+        thumbnail: params.thumbnail,
+    };
     await getDataStore().editProject({
-        project: params.project,
+        project,
     });
 }
 
