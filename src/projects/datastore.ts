@@ -114,6 +114,7 @@ export class ProjectStore implements ProjectDataStore {
     async editProject(params: {
         project: Project;
     }): Promise<void> {
+        console.log(params.project);
         await this.connection.query({
             sql: 'UPDATE `Projects` SET name = ?, url = ?, description = ? WHERE id = ?',
             values: [

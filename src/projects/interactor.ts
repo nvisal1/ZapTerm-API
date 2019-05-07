@@ -54,6 +54,7 @@ export async function searchAllProjects(params: {
 }
 
 export async function editUserProject(params: {
+    id: string,
     name: string,
     url: string,
     description: string,
@@ -72,6 +73,7 @@ export async function editUserProject(params: {
         id: params.environmentId,
     });
     const project = {
+        id: params.id,
         name: params.name,
         url: params.url,
         authorId: params.authorId,

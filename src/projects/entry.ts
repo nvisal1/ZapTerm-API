@@ -90,6 +90,7 @@ export const insertProject = {
 export const editProject = {
     type: GraphQLBoolean,
     args: {
+        id: {type: GraphQLID},
         name: {type: GraphQLString},
         url: {type: GraphQLString},
         description: {type: GraphQLString},
@@ -102,6 +103,7 @@ export const editProject = {
     },
     resolve(parent: any, args: any): any {
         return editUserProject({
+            id: args.id,
             name: args.name,
             url: args.url,
             description: args.description,
