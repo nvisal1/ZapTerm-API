@@ -19,5 +19,9 @@ export interface UserDataStore {
     deleteUser(params: {
         id: string;
     }): Promise<void>;
+    addToFavorites(params: {
+        userId: string,
+        projectId: string,
+    }): Promise<void>;
 }
 

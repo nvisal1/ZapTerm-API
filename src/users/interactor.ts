@@ -74,6 +74,16 @@ export async function deleteUserInfo(params: {
     });
 }
 
+export async function insertFavoriteProject(params: {
+    userId: string,
+    projectId: string,
+}): Promise<void> {
+    await getDataStore().addToFavorites({
+        userId: params.userId,
+        projectId: params.projectId,
+    });
+}
+
 function getDataStore() {
     return UserStore.getInstance();
 }

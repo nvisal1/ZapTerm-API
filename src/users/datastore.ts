@@ -86,6 +86,18 @@ export class UserStore implements UserDataStore {
             ],
         });
     }
+    async addToFavorites(params: {
+        userId: string,
+        projectId: string,
+    }): Promise<void> {
+        await this.connection.query({
+            sql: 'INSERT INTO `Favorites` (userId, projectId) VALUES (?, ?)',
+            values: [
+                params.userId,
+                params.projectId,
+            ],
+        });
+    }
     async deleteUser(params: {
         id: string;
     }): Promise<void> {

@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean } from 'graphql';
-import { getUser, getToken, insertUser, editUserInfo, deleteUserInfo } from './interactor';
+import { getUser, getToken, insertUser, editUserInfo, deleteUserInfo, insertFavoriteProject } from './interactor';
 import { resolve } from 'path';
 
 const UserType = new GraphQLObjectType({
@@ -111,3 +111,17 @@ export const register = {
         });
     },
 };
+
+export const addToFavorites = {
+    type: GraphQLBoolean,
+    args: {
+        userId: {type: GraphQLID},
+        projectId: {type: GraphQLID},
+    },
+    resolve(parent: any, args: any): any {
+        return insertFavoriteProject({
+            userId: args.userId,
+            projectId: args.projectId,
+        });
+    },
+}

@@ -30,6 +30,7 @@ import {
     register,
     editUser,
     deleteUser,
+    addToFavorites,
 } from '../users/entry';
 import {
     getAllFrameworks,
@@ -64,6 +65,7 @@ export class Express {
                 register,
                 editUser,
                 deleteUser,
+                addToFavorites,
                 getAllFrameworks,
             },
         });
