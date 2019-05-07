@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean } from 'graphql';
+import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean, GraphQLList } from 'graphql';
 import { getUser, getToken, insertUser, editUserInfo, deleteUserInfo, insertFavoriteProject } from './interactor';
 import { resolve } from 'path';
 
@@ -124,4 +124,4 @@ export const addToFavorites = {
             projectId: args.projectId,
         });
     },
-}
+};

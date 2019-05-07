@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean, GraphQLList, GraphQLInt } from 'graphql';
-import { getProject, getUserProjects, insertNewProject, searchAllProjects, editUserProject, deleteUserProject, getProjectCount, buildProject, destroyProject } from './interactor';
+import { getProject, getUserProjects, insertNewProject, searchAllProjects, editUserProject, deleteUserProject, getProjectCount, buildProject, destroyProject, getUserFavorites, removeUserFavorite } from './interactor';
 import { stringify } from 'querystring';
 
 const ProjectType = new GraphQLObjectType({
@@ -162,6 +162,33 @@ export const stopProject = {
         });
     },
 };
+
+export const fetchUserFavorites = {
+    type: GraphQLList(ProjectType),
+    args: {
+        userId: {type: GraphQLID},
+    },
+    resolve(parent: any, args: any): any {
+        return getUserFavorites({
+            userId: args.userId,
+        });
+    },
+};
+
+export const removeFromFavorites = {
+    type: GraphQLBoolean,
+    args: {
+        projectId: {type: GraphQLID},
+        userId: {type: GraphQLID},
+    },
+    resolve(parent: any, args: any): any {
+        return removeUserFavorite({
+            userId: args.userId,
+            projectId: args.projectId,
+        });
+    },
+}
+
 
 
 

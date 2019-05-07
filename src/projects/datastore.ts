@@ -143,4 +143,31 @@ export class ProjectStore implements ProjectDataStore {
         });
         return result[0]['COUNT(authorId)'];
     }
+
+    async fetchUserFavorites(params: {
+        userId: string,
+    }): Promise<any> {
+        const result = await this.connection.query({
+            // tslint:disable-next-line:max-line-length
+            sql: 'SELECT Projects.id, Projects.authorId, Projects.url, Projects.name, Projects.description, Projects.thumbnail, Projects.environmentId, Favorites.userId, Favorites.projectId FROM `Favorites` INNER JOIN `Projects` ON Projects.id = Favorites.projectId WHERE Favorites.userId = ?',
+            values: [params.userId],
+        });
+        return result;
+    }
+
+    async removeFavorite(params: {
+        userId: string,
+        projectId: string,
+    }): Promise<void> {
+        console.log(params.userId);
+        console.log(params.projectId);
+        await this.connection.query({
+            // tslint:disable-next-line:max-line-length
+            sql: 'DELETE FROM `Favorites` WHERE userId = ? AND projectId = ?',
+            values: [
+                params.userId,
+                params.projectId,
+            ],
+        });
+    }
 }

@@ -22,6 +22,8 @@ import {
     getUserProjectCount,
     startProject,
     stopProject,
+    fetchUserFavorites,
+    removeFromFavorites,
 } from '../projects/entry';
 import {
     user,
@@ -67,6 +69,8 @@ export class Express {
                 deleteUser,
                 addToFavorites,
                 getAllFrameworks,
+                fetchUserFavorites,
+                removeFromFavorites,
             },
         });
 

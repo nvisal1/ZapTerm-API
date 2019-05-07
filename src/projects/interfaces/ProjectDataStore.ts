@@ -33,4 +33,11 @@ export interface ProjectDataStore {
     getUserProjectCount(params: {
         authorId: string;
     }): Promise<any>;
+    fetchUserFavorites(params: {
+        userId: string,
+    }): Promise<any>;
+    removeFavorite(params: {
+        userId: string,
+        projectId: string,
+    }): Promise<void>;
 }

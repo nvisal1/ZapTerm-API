@@ -91,6 +91,24 @@ export async function deleteUserProject(params: {
     });
 }
 
+export async function getUserFavorites(params: {
+    userId: string,
+}): Promise<Project[]> {
+    return await getDataStore().fetchUserFavorites({
+        userId: params.userId,
+    });
+}
+
+export async function removeUserFavorite(params: {
+    userId: string,
+    projectId: string,
+}): Promise<void> {
+    await getDataStore().removeFavorite({
+        userId: params.userId,
+        projectId: params.projectId,
+    });
+}
+
 export async function getProjectCount(params: {
     authorId: string,
 }): Promise<{count: number}> {
